@@ -33,8 +33,14 @@ $(document).ready(function() { /* code here */
 });
 
 async function racaPrice(){
-    this.href = "https://api.pancakeswap.info/api/v2/tokens/0x12bb890508c125661e03b09ec06e404bc9289040";
-    let response = await fetch(this.href);
+    // this.href = "https://api.pancakeswap.info/api/v2/tokens/0x12bb890508c125661e03b09ec06e404bc9289040";
+    this.href = "https://api.coinmarketcap.com/v1/ticker/radio-caca/?convert=USD&start=1";
+    let response = await fetch(this.href,{
+        headers: new Headers({
+            'X-CMC_PRO_API_KEY': '5c54aacd-5850-49ad-b10d-9ea64c120024',
+            'Accepts':'application/json'
+        })
+    });
     let data = await response.json();
     console.log(data.data.price)
     return data.data.price;
@@ -57,7 +63,6 @@ var showToast = function(){
 <option value="17">Egg</option>
 <option value="10">Matrix Plus Box</option> */}
 var loadHistory = function(idText,idTextUSD,sl,categories,racaPrice){
-    // this.href = "https://market-api.radiocaca.com/users/0xe9b5f08261ab5f1d59706286be6734b40c79deac/histories?pageNo=1&pageSize=100";
     totalViewMarket = 50;
     this.href="https://market-api.radiocaca.com/nft-sales?pageNo=1&pageSize="+totalViewMarket+"&sortBy=created_at&order=desc&name=&saleType&category="+categories+"&tokenType&tokenId=-1";
     var newList = [];
