@@ -21,16 +21,47 @@ $(document).ready(function() { /* code here */
     racaPrice().then(data=>{
         data = Number(data).toFixed(6);
         $('#racaprice').text(data);
-        listNFT.forEach(element => {
-            if(element.categories==0){
-                loadToken(element.name,element.name+"Usd",element.sl,data);
-            }else{
-                loadHistory(element.name,element.name+"Usd",element.sl,element.categories,data);
-            }   
-
-        });
+        // listNFT.forEach(element => {
+        //     if(element.categories==0){
+        //         loadToken(element.name,element.name+"Usd",element.sl,data);
+        //     }else{
+        //         loadHistory(element.name,element.name+"Usd",element.sl,element.categories,data);
+        //     }   
+        // });
+        let requests = listNFT.map((item) => {
+            return new Promise((resolve) => {
+              asyncFunction(item, resolve,data);
+            });
+        })     
+        Promise.all(requests).then(() => setTimeout(() => {totalCalculation()},3000));
     });
 });
+
+async function load(){
+    await Promise.all(
+        listNFT.map(
+            async (item)=>{
+                await asyncFunction(item)
+            }
+        )
+    )
+    console.log("end");
+}
+
+
+
+function asyncFunction (item, cb,data) {
+    setTimeout(() => {
+      console.log('done with', item);
+    if(item.categories==0)
+        loadToken(item.name,item.name+"Usd",item.sl,data);
+    else
+        loadHistory(item.name,item.name+"Usd",item.sl,item.categories,data);
+            
+      cb();
+    }, 100);
+  }
+  
 
 async function racaPrice(){
     // this.href = "https://api.pancakeswap.info/api/v2/tokens/0x12bb890508c125661e03b09ec06e404bc9289040";
@@ -73,7 +104,6 @@ var loadHistory = function(idText,idTextUSD,sl,categories,racaPrice){
             }).forEach(element => {
                 newList.push(element.fixed_price);
                 if(newList.length==data.list.length){
-                    console.log(newList)
                     totalPrice = Number(Math.min.apply(Math, newList));
                     document.getElementById(idText).value = totalPrice*sl;
                     document.getElementById(idTextUSD).value = Number(totalPrice*racaPrice*sl).toFixed(0);
