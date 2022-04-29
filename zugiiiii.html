@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Metamon</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/index.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/bootstrap/css/bootstrap-grid.min.css'>
+
+
+</head>
+<body>
+  <div class="container" id="fatherNode">
+    
+    <div class="row mb-12">
+      <div class="col" style="margin-top: 20px;">
+        <div>Giá Raca : <h4 id="racaprice"> 231 </h4></div>
+        <!-- ------mml---------- -->
+        <div class="row mt-12">
+          <div class="input-group mb-12 col-sm-12">
+            <span class="input-group-text title-zugi"></span>
+            <input type="text" class="form-control header-txt" value="RACA" disabled>
+            <input type="text" class="form-control header-txt" value="USD" disabled>
+          </div>
+        </div>
+
+        <!-- ------mml---------- -->
+        <div class="row mt-12">
+          <div class="input-group mb-12 col-sm-12">
+            <span class="input-group-text title-zugi">MML Land</span>
+            <input type="text" class="form-control" value="0" id="mmlland" disabled>
+            <input type="text" class="form-control" value="0" id="mmllandUsd" disabled>
+          </div>
+        </div>
+
+        <!-- ------Kiss---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">Kiss-up Land</span>
+            <input type="text" class="form-control" value="0" id="kissland" disabled>
+            <input type="text" class="form-control" value="0" id="kisslandUsd" disabled>
+          </div>
+        </div>
+        
+        <!-- ------RacaPunk---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">Raca Punk</span>
+            <input type="text" class="form-control" value="0" id="punk" disabled>
+            <input type="text" class="form-control" value="0" id="punkUsd" disabled>
+          </div>
+        </div>
+
+        <!-- ------R MTM---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">R MTM</span>
+            <input type="text" class="form-control" value="0" id="mtmR" disabled>
+            <input type="text" class="form-control" value="0" id="mtmRUsd" disabled>
+          </div>
+        </div>
+        <!-- ------MTM---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">N MTM</span>
+            <input type="text" class="form-control" value="0" id="mtmN" disabled>
+            <input type="text" class="form-control" value="0" id="mtmNUsd" disabled>
+          </div>
+        </div>
+        <!-- ------Token---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">Token</span>
+            <input type="text" class="form-control" value="0" id="token" disabled>
+            <input type="text" class="form-control" value="0" id="tokenUsd" disabled>
+          </div>
+        </div>
+
+
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <button class="btn btn-success" onclick="totalCalculation()">Tính tổng</button>
+          </div>
+        </div>
+        <!-- ------Tổng---------- -->
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">Tổng</span>
+            <input type="text" class="form-control" value="0" id="total" disabled>
+            <input type="text" class="form-control" value="0" id="totalUsd" disabled>
+          </div>
+        </div>
+        <div class="row mt-20">
+          <div class="input-group col-sm-12">
+            <span class="input-group-text  title-zugi">VND</span>
+            <input type="text" class="form-control" value="0" id="totalVnd" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="https://racawebsource.s3.us-east-2.amazonaws.com/assets/guaishou.png" class="rounded me-2" style="width: 60px;" alt="...">
+        <strong class="me-auto">Success</strong>
+        <small>1 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <span id="notification-bar"></span>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Metamon Score</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col" id="frameDetails">
+           
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
+<script type="text/javascript" src='js/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='js/zugi.js'></script>
+
+</body>
+</html>
+
+
+

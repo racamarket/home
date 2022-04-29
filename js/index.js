@@ -3,7 +3,8 @@ var totalViewMarket = 0;
 var categories = 0;
 var scoreFrom, scoreTo = 0;
 var priceFrom, priceTo = 0;
-var totalListShow,tb = [];
+var totalListShow,tb = []; 
+
 var xtb = [];
 $(document).ready(function() { /* code here */ 
 
@@ -53,13 +54,9 @@ $(document).ready(function() { /* code here */
         //     } );
         // }
 
+        
     });
 
-
-
-
-        var select = document.getElementById('fatherNode');
-        select.removeChild(select.lastChild);
 });
 
 var reloadPage = function(){
@@ -67,6 +64,9 @@ var reloadPage = function(){
     totalListShow = [];
     tb.clear();
 }
+
+
+
 var loadHistory = function(){
     // this.href = "https://market-api.radiocaca.com/users/0xe9b5f08261ab5f1d59706286be6734b40c79deac/histories?pageNo=1&pageSize=100";
     totalViewMarket = 50;
@@ -207,3 +207,6 @@ function convertUTCDateToLocalDate(date) {
 
     return newDate;   
 }
+
+
+
