@@ -34,11 +34,13 @@ $(document).ready(function() { /* code here */
 
 async function racaPrice(){
     // this.href = "https://api.pancakeswap.info/api/v2/tokens/0x12bb890508c125661e03b09ec06e404bc9289040";
-    this.href = "https://api.coinmarketcap.com/v1/ticker/radio-caca/?convert=USD&start=1";
+    this.href = "https://api.coinmarketcap.com/v1/ticker/radio-caca/?convert=USD&start=1&limit=5000";
     let response = await fetch(this.href,{
         headers: new Headers({
             'X-CMC_PRO_API_KEY': '5c54aacd-5850-49ad-b10d-9ea64c120024',
-            'Accepts':'application/json'
+            'Accepts':'application/json',
+            'Access-Control-Allow-Origin':'https://racamarket.github.io/',
+            'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept'
         })
     });
     let data = await response.json();
